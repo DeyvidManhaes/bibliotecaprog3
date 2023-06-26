@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="241.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.femass.controller.LoginController">
+   <children>
+      <Label layoutX="115.0" layoutY="90.0" text="Usuário" />
+      <Label layoutX="115.0" layoutY="137.0" text="Senha" />
+      <TextField fx:id="TxtLogin" layoutX="174.0" layoutY="85.0" />
+      <PasswordField fx:id="Senha" layoutX="174.0" layoutY="132.0" />
+      <Button fx:id="button" layoutX="306.0" layoutY="185.0" mnemonicParsing="false" onAction="#Logar_button" text="Logar" />
+      <ImageView fitHeight="67.0" fitWidth="82.0" layoutX="14.0" layoutY="6.0">
+         <image>
+            <Image url="@../../../../imagem%20login.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
