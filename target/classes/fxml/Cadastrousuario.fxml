@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ListView layoutX="14.0" layoutY="34.0" prefHeight="266.0" prefWidth="200.0" />
+      <Label layoutX="75.0" layoutY="14.0" text="Lista Usuários" />
+      <Label layoutX="246.0" layoutY="108.0" text="Login" />
+      <Label layoutX="244.0" layoutY="140.0" text="Senha" />
+      <Label layoutX="244.0" layoutY="35.0" text="Nome" />
+      <Label layoutX="243.0" layoutY="66.0" text="Telefone" />
+      <Label layoutX="243.0" layoutY="87.0" text="E-mail" />
+   </children>
+</Pane>

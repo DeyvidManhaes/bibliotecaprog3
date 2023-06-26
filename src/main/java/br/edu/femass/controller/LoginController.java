@@ -49,7 +49,7 @@ public class LoginController implements Initializable{
         Usuario u = daousuario.findById(daousuario);
         
         if(usuario.equals(u.getLogin()) && Senha1.equals(u.getSenha())){
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Recepcao.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Usuario.fxml"));
             Scene scene = new Scene(root);
             Stage stage = new Stage();
     

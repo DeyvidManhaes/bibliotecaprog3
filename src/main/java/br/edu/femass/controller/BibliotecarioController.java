@@ -16,7 +16,7 @@ public class BibliotecarioController implements Initializable{
  @FXML
     private void ClickButton_Usu(ActionEvent event){
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Usuario.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Cadastrousuario.fxml"));
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
