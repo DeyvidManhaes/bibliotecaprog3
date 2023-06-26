@@ -16,8 +16,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.femass.controller.MedicoController">
-   <top>
-      <Pane prefHeight="408.0" prefWidth="2446.0" BorderPane.alignment="CENTER">
+   <center>
+      <Pane prefHeight="408.0" prefWidth="16121.0" BorderPane.alignment="CENTER">
          <children>
             <ListView fx:id="listalivros" layoutX="14.0" layoutY="39.0" onKeyPressed="#listalivros_keyPressed" onMouseClicked="#listalivros_mouseClicked" prefHeight="314.0" prefWidth="231.0" />
             <GridPane layoutX="260.0" layoutY="39.0" prefHeight="206.0" prefWidth="288.0">
@@ -46,10 +46,8 @@
                   <Button mnemonicParsing="false" onAction="#BtnBuscar_Click" text="Busca" GridPane.rowIndex="5" />
                </children>
             </GridPane>
-            <ListView fx:id="listaemprestimos" layoutX="646.0" layoutY="39.0" onKeyPressed="#listaemprestimos_keyPressed" onMouseClicked="#listaemprestimos_mouseClicked" prefHeight="314.0" prefWidth="339.0" />
             <Label layoutX="43.0" layoutY="14.0" text="Livros com cópias disponíveis" />
-            <Label layoutX="706.0" layoutY="14.0" text="Emprestimos em andamento" />
          </children>
       </Pane>
-   </top>
+   </center>
 </BorderPane>

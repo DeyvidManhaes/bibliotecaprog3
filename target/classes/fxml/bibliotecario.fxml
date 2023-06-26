@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="244.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.femass.controller.ADMController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="244.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.femass.controller.ontroller">
    <children>
       <Button layoutX="69.0" layoutY="61.0" mnemonicParsing="false" onAction="#ClickButton_Usu" text="Cadastro Usuários" />
       <Button layoutX="366.0" layoutY="61.0" mnemonicParsing="false" onAction="#ClickButton_Livros" text="Cadastro Livros" />
