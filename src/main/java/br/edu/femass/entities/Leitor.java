@@ -20,6 +20,7 @@ public class Leitor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    private String email;
      
     
     protected Integer prazoMaximoDevolucao;
