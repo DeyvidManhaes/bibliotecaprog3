@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1018.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.femass.gui.LivrosController">
+   <children>
+      <Label layoutX="14.0" layoutY="23.0" text="Livros:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="268.0" layoutY="63.0" prefHeight="84.0" prefWidth="294.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="123.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="171.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label prefHeight="17.0" prefWidth="123.0" text="Nome:" GridPane.rowIndex="1" />
+            <TextField fx:id="TxtNome" disable="true" prefHeight="25.0" prefWidth="167.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label prefHeight="17.0" prefWidth="123.0" text="Autor:" GridPane.rowIndex="2" />
+            <Label prefHeight="17.0" prefWidth="123.0" text="Id:" GridPane.halignment="LEFT" />
+            <TextField fx:id="TxtId" disable="true" prefHeight="25.0" prefWidth="167.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="ComboBoxAutores" disable="true" prefHeight="25.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <Button fx:id="BotaoInserir" layoutX="190.0" layoutY="277.0" mnemonicParsing="false" onAction="#Inserir_Click" text="Inserir" />
+      <Label layoutX="645.0" layoutY="42.0" prefHeight="17.0" prefWidth="148.0" text="Exemplares cadastrados:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TableView fx:id="TabelaEmprestimos" layoutX="645.0" layoutY="63.0" prefHeight="200.0" prefWidth="349.0">
+         <columns>
+            <TableColumn prefWidth="43.0" text="Cód" />
+            <TableColumn prefWidth="57.0" text="Título" />
+            <TableColumn prefWidth="91.0" text="Empréstimo" />
+            <TableColumn prefWidth="81.0" text="Devolução" />
+            <TableColumn prefWidth="75.0" text="Atrasado?" />
+         </columns>
+      </TableView>
+      <Button fx:id="BotaoExcluir" layoutX="128.0" layoutY="277.0" mnemonicParsing="false" onAction="#Excluir_Click" text="Deletar" />
+      <Button fx:id="BotaoAlterar" layoutX="66.0" layoutY="277.0" mnemonicParsing="false" onAction="#Alterar_Click" text="Alterar" />
+      <Button fx:id="BotaoSalvar" disable="true" layoutX="514.0" layoutY="163.0" mnemonicParsing="false" onAction="#Salvar_Click" text="Salvar" />
+      <ListView fx:id="ListaLivros" layoutX="14.0" layoutY="63.0" onKeyPressed="#ListarLeitores_KeyPressed" onMouseClicked="#ListarLeitores_MouseClicked" prefHeight="200.0" prefWidth="225.0" />
+   </children>
+</Pane>

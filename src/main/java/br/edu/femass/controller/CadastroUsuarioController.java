@@ -2,6 +2,7 @@ package br.edu.femass.controller;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.swing.Action;
@@ -11,12 +12,14 @@ import br.edu.femass.dao.DaoAluno;
 import br.edu.femass.dao.DaoEmprestimo;
 import br.edu.femass.dao.DaoLeitor;
 import br.edu.femass.dao.DaoProfessor;
+import br.edu.femass.dao.DaoUsuario;
 import br.edu.femass.entities.Aluno;
 import br.edu.femass.entities.Autor;
 import br.edu.femass.entities.Emprestimo;
 import br.edu.femass.entities.Leitor;
 import br.edu.femass.entities.Professor;
 import br.edu.femass.entities.Telefone;
+import br.edu.femass.entities.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -41,6 +44,8 @@ public class CadastroUsuarioController implements Initializable{
     @FXML
     private TextField TxtNome;
     @FXML
+    private TextField TxtId;
+    @FXML
     private TextField TxtTelefone;
     @FXML
     private TextField Txtddd;
@@ -52,6 +57,8 @@ public class CadastroUsuarioController implements Initializable{
     private TextField TxtSenha;
     @FXML
     private TextField TxtEspecifica;
+    @FXML
+    private TextField TxtPrazo;
    
      @FXML
     private TableView<Leitor> TabelaLeitores;
@@ -66,6 +73,7 @@ public class CadastroUsuarioController implements Initializable{
     
     @FXML
     private Button BotaoExcluir;
+    
     @FXML
     private Button BotaoEditar;
     @FXML
@@ -75,8 +83,10 @@ public class CadastroUsuarioController implements Initializable{
     private DaoAluno daoAluno = new DaoAluno();
     private DaoProfessor daoProfessor = new DaoProfessor();
     private DaoEmprestimo daoEmprestimo = new DaoEmprestimo();
+    private DaoUsuario daoUsuario = new DaoUsuario();
     private Leitor leitor;
     private Aluno aluno;
+    private Usuario usuario;
     private Professor professor;
     private boolean inserindo;
     private Telefone telefone;
@@ -105,6 +115,7 @@ public class CadastroUsuarioController implements Initializable{
 
                 telefone = new Telefone();
                 aluno = new Aluno();
+                usuario = new Usuario();
 
                 aluno.setNome(TxtNome.getText());
                 aluno.setEmail(TxtEmail.getText());
@@ -112,14 +123,20 @@ public class CadastroUsuarioController implements Initializable{
                 telefone.setNumero(TxtTelefone.getText());
                 aluno.addTelefone(telefone);
                 aluno.setMatricula(TxtEspecifica.getText());
+                aluno.setPrazoMaximoDevolucao();
+                aluno.setUsuario(usuario);
+                usuario.setLogin(aluno.getNome());
+                usuario.setSenha(TxtSenha.getText());
                 
 
                 if (inserindo) {
                     daoAluno.create(aluno);
+                    daoUsuario.create(usuario);
 
                     JOptionPane.showMessageDialog(null,  "Leitor"+" Id: "+leitor.getId()+" salvo!");
                 } else {
                     daoAluno.update(aluno);
+                    daoUsuario.update(usuario);
 
                     JOptionPane.showMessageDialog(null, "Leitor salvo!");
                 }
@@ -131,6 +148,7 @@ public class CadastroUsuarioController implements Initializable{
 
                 telefone = new Telefone();
                 professor = new Professor();
+                usuario = new Usuario();
 
                 professor.setNome(TxtNome.getText());
                 professor.setEmail(TxtEmail.getText());
@@ -138,15 +156,21 @@ public class CadastroUsuarioController implements Initializable{
                 telefone.setNumero(TxtTelefone.getText());
                 professor.addTelefone(telefone);
                 professor.setFormacao(TxtEspecifica.getText());
-                
-                
+                professor.setPrazoMaximoDevolucao();
+                professor.setUsuario(usuario);
+                usuario.setLogin(professor.getNome());
+                usuario.setSenha(TxtSenha.getText());
 
                 if (inserindo) {
                     daoProfessor.create(professor);
+                    daoUsuario.create(usuario);
 
                     JOptionPane.showMessageDialog(null, "Leitor"+" Id: "+leitor.getId()+" salvo!");
                 } else {
                     daoProfessor.update(professor);
+                    daoUsuario.update(usuario);
+                        
+                    
 
                     JOptionPane.showMessageDialog(null, "Leitor salvo!");
                 }
@@ -177,16 +201,19 @@ public class CadastroUsuarioController implements Initializable{
     private void Button_Click_Excluir(ActionEvent event) {
 
         if (TabelaLeitores.getSelectionModel().getSelectedItem().getClass() == Aluno.class) {
-
+             
             aluno = (Aluno) TabelaLeitores.getSelectionModel().getSelectedItem();
+            
 
             daoAluno.delete(aluno);
+            daoUsuario.delete(usuario.getLogin().equals(aluno.getNome()));
 
         } else if (TabelaLeitores.getSelectionModel().getSelectedItem().getClass() == Professor.class) {
 
             professor = (Professor) TabelaLeitores.getSelectionModel().getSelectedItem();
 
             daoProfessor.delete(professor);
+            daoUsuario.delete(usuario.getLogin().equals(professor.getNome()));
 
         }
 
@@ -250,55 +277,69 @@ public class CadastroUsuarioController implements Initializable{
     private void exibirDados() {
 
         this.leitor = TabelaLeitores.getSelectionModel().getSelectedItem();
+        
 
         if (leitor.getClass() == Aluno.class)
+            
             aluno = (Aluno) leitor;
+            
+           
+            
+
         else
             professor = (Professor) leitor;
 
         if (leitor == null)
             return;
 
-        CampoCodigo.setText(leitor.getCodigo().toString());
-        CampoNome.setText(leitor.getNome());
-        CampoEndereco.setText(leitor.getEndereco());
-        CampoTelefone.setText(leitor.getTelefone());
-        CampoPrazo.setText(leitor.getPrazoMaximoDevolucao().toString());
-        ComboBoxTipoLeitor.setPromptText(leitor.getClass().getSimpleName());
-        LabelInfoEspecifica.setText(leitor.getClass() == Aluno.class ? "Matrícula" : "Disciplina");
-        CampoInfoEspecifica
-                .setText(leitor.getClass() == Aluno.class ? aluno.getMatricula() : professor.getDisciplina());
+        TxtId.setText(leitor.getId().toString());
+        TxtNome.setText(leitor.getNome());
+        TxtEmail.setText(leitor.getEmail());
+        TxtLogin.setText(usuario.getLogin());
+        TxtSenha.setText(usuario.getSenha());
+
+        TxtTelefone.setText(telefone.getNumero());
+        Txtddd.setText(telefone.getDdd());
+        TxtPrazo.setText(leitor.getPrazoMaximoDevolucao().toString());
+        CBoxTipo.setValue(leitor.getClass().getSimpleName());
+        LabelInfo.setText(leitor.getClass() == Aluno.class ? "Matrícula" : "Disciplina");
+        TxtEspecifica.setText(leitor.getClass() == Aluno.class ? aluno.getMatricula() : professor.getFormacao());
 
     }
 
     private void dadosEmBranco() {
 
-        CampoCodigo.setText("");
-        CampoNome.setText("");
-        CampoEndereco.setText("");
-        CampoTelefone.setText("");
-        CampoInfoEspecifica.setText("");
-        CampoPrazo.setText("");
-        ComboBoxTipoLeitor.setValue("Selecione um tipo de leitor");
+        TxtId.setText("");
+        TxtNome.setText("");
+        TxtEmail.setText("");
+        TxtTelefone.setText("");
+        Txtddd.setText("");
+        TxtEspecifica.setText("");
+        TxtPrazo.setText("");
+        CBoxTipo.setValue("Selecione um tipo de leitor");
         ;
-        LabelInfoEspecifica.setText("");
-        CampoInfoEspecifica.setText("");
+        LabelInfo.setText("");
+        TxtEspecifica.setText("");
+        TxtLogin.setText("");
+        TxtSenha.setText("");
 
     }
 
     private void editar(boolean habilitar) {
 
         TabelaLeitores.setDisable(habilitar); // Desabilita
-        TabelaEmprestimos.setDisable(habilitar); // Desabilita
-        CampoNome.setDisable(!habilitar); // Habilita
-        CampoEndereco.setDisable(!habilitar);
-        CampoTelefone.setDisable(!habilitar);
+        Lista_emprestimos.setDisable(habilitar); // Desabilita
+        TxtNome.setDisable(!habilitar); // Habilita
+        TxtEmail.setDisable(!habilitar);
+        TxtTelefone.setDisable(!habilitar);
+        Txtddd.setDisable(!habilitar);
         BotaoExcluir.setDisable(habilitar);
-        BotaoInserir.setDisable(habilitar);
-        BotaoAlterar.setDisable(habilitar);
+        BotaoCadastrar.setDisable(habilitar);
+        BotaoEditar.setDisable(habilitar);
         BotaoSalvar.setDisable(!habilitar);
-        ComboBoxTipoLeitor.setDisable(!habilitar);
-        CampoInfoEspecifica.setDisable(!habilitar);
+        CBoxTipo.setDisable(!habilitar);
+        TxtEspecifica.setDisable(!habilitar);
+        TxtSenha.setDisable(!habilitar);
 
     }
 
@@ -308,10 +349,10 @@ public class CadastroUsuarioController implements Initializable{
         tiposDeLeitor.add("Aluno");
         tiposDeLeitor.add("Professor");
         ObservableList<String> itensCombo = FXCollections.observableArrayList(tiposDeLeitor);
-        ComboBoxTipoLeitor.setItems(itensCombo);
+        CBoxTipo.setItems(itensCombo);
 
-        List<Aluno> alunos = daoAluno.buscarTodos();
-        List<Professor> professores = daoProfessor.buscarTodos();
+        List<Aluno> alunos = daoAluno.findAll();
+        List<Professor> professores = daoProfessor.findAll();
         List<Leitor> leitores = new ArrayList<>();
 
         leitores.addAll(alunos);
@@ -320,7 +361,7 @@ public class CadastroUsuarioController implements Initializable{
         ObservableList<Leitor> data1 = FXCollections.observableArrayList(leitores);
         TabelaLeitores.setItems(data1);
 
-        List<Emprestimo> emprestimos = daoEmprestimo.buscarTodos();
+        List<Emprestimo> emprestimos = daoEmprestimo.findAll();
 
         List<Emprestimo> emprestimosDoLeitor = new ArrayList<>();
 
@@ -334,7 +375,7 @@ public class CadastroUsuarioController implements Initializable{
         }
 
         ObservableList<Emprestimo> data2 = FXCollections.observableArrayList(emprestimos);
-        TabelaEmprestimos.setItems(data2);
+        Lista_emprestimos.setItems(data2);
 
     }
 }
