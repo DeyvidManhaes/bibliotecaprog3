@@ -3,13 +3,16 @@ package br.edu.femass.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import org.hibernate.mapping.List;
+import java.util.List;
 
+import br.edu.femass.dao.Dao;
 import br.edu.femass.dao.DaoAutor;
 import br.edu.femass.dao.DaoCopia;
+import br.edu.femass.dao.DaoGenero;
 import br.edu.femass.dao.DaoLivro;
 import br.edu.femass.entities.Autor;
 import br.edu.femass.entities.Copia;
+import br.edu.femass.entities.Genero;
 import br.edu.femass.entities.Livro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,7 +34,13 @@ public class LivrosController implements Initializable {
     @FXML
     private TextField TxtNome;
     @FXML
+    private TextField TxtAno;
+    @FXML
+    private TextField TxtEdicao;
+    @FXML
     private ComboBox<Autor> ComboBoxAutores;
+    @FXML
+    private ComboBox<Genero> ComboBoxGenero;
     @FXML
     private ListView<Livro> ListaLivros;
     @FXML
@@ -48,6 +57,7 @@ public class LivrosController implements Initializable {
     private DaoLivro daoLivro = new DaoLivro();
     private DaoAutor daoAutor = new DaoAutor();
     private DaoCopia daoCopia = new DaoCopia();
+    private DaoGenero daoGenero = new DaoGenero();
     private Livro livro;
     private boolean inserindo;
 
@@ -62,10 +72,15 @@ public class LivrosController implements Initializable {
     private void Salvar_Click(ActionEvent event) {
 
         Autor autor = ComboBoxAutores.getSelectionModel().getSelectedItem();
+        Genero genero = ComboBoxGenero.getSelectionModel().getSelectedItem();
 
         livro.setNome(TxtNome.getText());
+        livro.setAno(Integer.parseInt(TxtAno.getText()));
+        livro.setEdicao(TxtEdicao.getText());
         livro.setAutor(autor);
+        livro.setGenero(genero);
         autor.adicionarLstLivro(livro);
+        genero.adicionarLstLivro(livro);
 
         if (inserindo) {
             daoLivro.create(livro);
@@ -104,6 +119,7 @@ public class LivrosController implements Initializable {
         TxtId.setText("");
         TxtNome.setText("");
         ComboBoxAutores.setValue(null);
+        ComboBoxGenero.setValue(null);
 
         // Deixa o cursor nesse campo para digitar
         TxtNome.requestFocus();
@@ -136,6 +152,7 @@ public class LivrosController implements Initializable {
         TxtId.setText(livro.getId().toString());
         TxtNome.setText(livro.getNome());
         ComboBoxAutores.setValue(livro.getAutor());
+        ComboBoxGenero.setValue(livro.getGenero());
 
     }
 
@@ -145,6 +162,7 @@ public class LivrosController implements Initializable {
         TabelaEmprestimos.setDisable(habilitar); // Desabilita
         TxtNome.setDisable(!habilitar); // Habilita
         ComboBoxAutores.setDisable(!habilitar);
+        ComboBoxGenero.setDisable(!habilitar);
         BotaoExcluir.setDisable(habilitar);
         BotaoInserir.setDisable(habilitar);
         BotaoAlterar.setDisable(habilitar);
@@ -159,15 +177,20 @@ public class LivrosController implements Initializable {
         ObservableList<Livro> data1 = FXCollections.observableArrayList(livros);
         ListaLivros.setItems(data1);
 
+        List<Genero> generos = daoGenero.findAll();
+
+        ObservableList<Genero> data2 = FXCollections.observableArrayList(generos);
+        ComboBoxGenero.setItems(data2);
+
         List<Copia> copias = daoCopia.findAll();
 
-        ObservableList<Copia> data2 = FXCollections.observableArrayList(copias);
-        TabelaEmprestimos.setItems(data2);
+        ObservableList<Copia> data3 = FXCollections.observableArrayList(copias);
+        TabelaEmprestimos.setItems(data3);
 
         List<Autor> autores = daoAutor.findAll();
 
-        ObservableList<Autor> data3 = FXCollections.observableArrayList(autores);
-        ComboBoxAutores.setItems(data3);
+        ObservableList<Autor> data4 = FXCollections.observableArrayList(autores);
+        ComboBoxAutores.setItems(data4);
 
     }
 }

@@ -5,16 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.swing.Action;
 import javax.swing.JOptionPane;
 
 import br.edu.femass.dao.DaoAluno;
 import br.edu.femass.dao.DaoEmprestimo;
-import br.edu.femass.dao.DaoLeitor;
 import br.edu.femass.dao.DaoProfessor;
 import br.edu.femass.dao.DaoUsuario;
 import br.edu.femass.entities.Aluno;
-import br.edu.femass.entities.Autor;
 import br.edu.femass.entities.Emprestimo;
 import br.edu.femass.entities.Leitor;
 import br.edu.femass.entities.Professor;
@@ -32,7 +29,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
