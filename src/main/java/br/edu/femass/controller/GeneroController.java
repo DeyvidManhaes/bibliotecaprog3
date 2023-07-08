@@ -76,7 +76,7 @@ public class GeneroController implements Initializable {
     @FXML
     private void Excluir_Click(ActionEvent event) {
 
-        daoGenero.delete(genero);
+        daoGenero.delete(genero.getId());
         dadosEmBranco();
         preencherLista();
         JOptionPane.showMessageDialog(null, "Genero Excluido!");

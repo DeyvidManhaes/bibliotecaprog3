@@ -23,10 +23,10 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TableView fx:id="TabelaCopia" layoutX="14.0" layoutY="66.0" onKeyPressed="#ListarCopia_KeyPressed" onMouseClicked="#ListarCopia_MouseClicked" prefHeight="200.0" prefWidth="220.0">
+      <TableView fx:id="TabelaCopia" layoutX="14.0" layoutY="66.0" onKeyPressed="#ListarCopia_KeyPressed" onMouseClicked="#ListarCopia_MouseClicked" prefHeight="200.0" prefWidth="303.0">
         <columns>
           <TableColumn fx:id="ColunaCodigo" prefWidth="65.0" text="ID" />
-          <TableColumn fx:id="ColunaTitulo" prefWidth="154.0" text="Título" />
+          <TableColumn fx:id="ColunaTitulo" prefWidth="237.0" text="Título" />
         </columns>
       </TableView>
       <ComboBox fx:id="ComboBoxLivros" layoutX="14.0" layoutY="309.0" prefHeight="31.0" prefWidth="182.0" promptText="Selecione um livro" />

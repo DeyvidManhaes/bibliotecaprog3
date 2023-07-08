@@ -51,10 +51,10 @@
             <TextField fx:id="TxtPrazo" prefHeight="31.0" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
          </children>
       </GridPane>
-      <Button layoutX="343.0" layoutY="315.0" mnemonicParsing="false" onAction="#Button_Click_Excluir" text="Excluir" />
-      <Button layoutX="436.0" layoutY="315.0" mnemonicParsing="false" onAction="#Button_Click_Editar" text="Editar" />
-      <Button layoutX="512.0" layoutY="315.0" mnemonicParsing="false" onAction="#Button_click_Cadastrar" text="Cadastrar" />
-      <Button layoutX="494.0" layoutY="379.0" mnemonicParsing="false" onAction="#Salvar_Click" text="Salvar" />
+      <Button fx:id="ButtonExcluir" layoutX="343.0" layoutY="315.0" mnemonicParsing="false" onAction="#Button_Click_Excluir" text="Excluir" />
+      <Button fx:id="ButtonEditar" layoutX="436.0" layoutY="315.0" mnemonicParsing="false" onAction="#Button_Click_Editar" text="Editar" />
+      <Button fx:id="ButtonCadastrar" layoutX="512.0" layoutY="315.0" mnemonicParsing="false" onAction="#Button_Click_Cadastrar" text="Cadastrar" />
+      <Button fx:id="BotaoSalvar" layoutX="494.0" layoutY="379.0" mnemonicParsing="false" onAction="#Salvar_Click" text="Salvar" />
       <TableView fx:id="TabelaLeitores" layoutY="35.0" onKeyPressed="#ListarLeitores_KeyPressed" onMouseClicked="#ListarLeitores_MouseClicked" prefHeight="216.0" prefWidth="223.0">
         <columns>
           <TableColumn fx:id="ColunaNome" prefWidth="75.0" text="Nome" />

@@ -78,6 +78,38 @@ public class BibliotecarioController implements Initializable{
         }
 
     }
+     @FXML
+    private void ClickButton_Autores(ActionEvent event){
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Autor.fxml"));
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+
+            stage.setTitle("Cadastro Autores");
+            stage.setScene(scene);
+            stage.show();
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+
+    }
+    @FXML
+    private void ClickButton_Copias(ActionEvent event){
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Copia.fxml"));
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+
+            stage.setTitle("Cadastro Cópias");
+            stage.setScene(scene);
+            stage.show();
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -24,7 +24,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <GridPane layoutX="268.0" layoutY="63.0" prefHeight="84.0" prefWidth="294.0">
+      <GridPane layoutX="268.0" layoutY="63.0" prefHeight="135.0" prefWidth="300.0">
          <columnConstraints>
             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="123.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="171.0" />
@@ -33,14 +33,23 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Label prefHeight="17.0" prefWidth="123.0" text="Nome:" GridPane.rowIndex="1" />
             <TextField fx:id="TxtNome" disable="true" prefHeight="25.0" prefWidth="167.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label prefHeight="17.0" prefWidth="123.0" text="Autor:" GridPane.rowIndex="2" />
+            <Label prefHeight="17.0" prefWidth="123.0" text="Autor:" GridPane.rowIndex="4" />
             <Label prefHeight="17.0" prefWidth="123.0" text="Id:" GridPane.halignment="LEFT" />
             <TextField fx:id="TxtId" disable="true" prefHeight="25.0" prefWidth="167.0" GridPane.columnIndex="1" />
-            <ComboBox fx:id="ComboBoxAutores" disable="true" prefHeight="25.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ComboBox fx:id="ComboBoxAutores" disable="true" prefHeight="25.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label prefHeight="17.0" prefWidth="123.0" text="Genero:" GridPane.rowIndex="5" />
+            <ComboBox fx:id="ComboBoxGenero" disable="true" prefHeight="25.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label prefHeight="17.0" prefWidth="123.0" text="Ano:" GridPane.rowIndex="2" />
+            <Label prefHeight="17.0" prefWidth="123.0" text="Edição:" GridPane.rowIndex="3" />
+            <TextField fx:id="TxtAno" disable="true" prefHeight="25.0" prefWidth="167.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="TxtEdicao" disable="true" prefHeight="25.0" prefWidth="167.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
       <Button fx:id="BotaoInserir" layoutX="190.0" layoutY="277.0" mnemonicParsing="false" onAction="#Inserir_Click" text="Inserir" />
@@ -60,7 +69,7 @@
       </TableView>
       <Button fx:id="BotaoExcluir" layoutX="128.0" layoutY="277.0" mnemonicParsing="false" onAction="#Excluir_Click" text="Deletar" />
       <Button fx:id="BotaoAlterar" layoutX="66.0" layoutY="277.0" mnemonicParsing="false" onAction="#Alterar_Click" text="Alterar" />
-      <Button fx:id="BotaoSalvar" disable="true" layoutX="514.0" layoutY="163.0" mnemonicParsing="false" onAction="#Salvar_Click" text="Salvar" />
+      <Button fx:id="BotaoSalvar" disable="true" layoutX="509.0" layoutY="232.0" mnemonicParsing="false" onAction="#Salvar_Click" text="Salvar" />
       <ListView fx:id="ListaLivros" layoutX="14.0" layoutY="63.0" onKeyPressed="#ListarLeitores_KeyPressed" onMouseClicked="#ListarLeitores_MouseClicked" prefHeight="200.0" prefWidth="225.0" />
    </children>
 </Pane>

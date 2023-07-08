@@ -107,8 +107,7 @@ public class CadastroUsuarioController implements Initializable{
         Boolean bool;
 
         do {
-            if (CBoxTipo.equals( "Aluno")) {
-
+            if (CBoxTipo.getSelectionModel().equals("Aluno")){
                 telefone = new Telefone();
                 aluno = new Aluno();
                 usuario = new Usuario();
@@ -140,7 +139,7 @@ public class CadastroUsuarioController implements Initializable{
                 bool = true;
                 break;
 
-            } else if (CBoxTipo.equals( "Professor")) {
+            } else if (CBoxTipo.getSelectionModel().equals( "Aluno")) {
 
                 telefone = new Telefone();
                 professor = new Professor();
@@ -201,14 +200,15 @@ public class CadastroUsuarioController implements Initializable{
             aluno = (Aluno) TabelaLeitores.getSelectionModel().getSelectedItem();
             
 
-            daoAluno.delete(aluno);
+            daoAluno.delete(aluno.getId());
+            
             daoUsuario.delete(usuario.getLogin().equals(aluno.getNome()));
 
         } else if (TabelaLeitores.getSelectionModel().getSelectedItem().getClass() == Professor.class) {
 
             professor = (Professor) TabelaLeitores.getSelectionModel().getSelectedItem();
 
-            daoProfessor.delete(professor);
+            daoProfessor.delete(professor.getId());
             daoUsuario.delete(usuario.getLogin().equals(professor.getNome()));
 
         }

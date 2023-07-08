@@ -33,6 +33,12 @@ public class Dao<E> {
         fechar();
         return this;
     }
+    public Dao<E> createm(E entity) {
+        abrir();
+        em.merge(entity);
+        fechar();
+        return this;
+    }
 
     public Dao<E> abrir() {
         em.getTransaction().begin();

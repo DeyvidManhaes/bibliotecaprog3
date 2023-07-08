@@ -3,6 +3,8 @@ package br.edu.femass.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import java.util.List;
 
 import br.edu.femass.dao.Dao;
@@ -57,7 +59,7 @@ public class LivrosController implements Initializable {
     private DaoLivro daoLivro = new DaoLivro();
     private DaoAutor daoAutor = new DaoAutor();
     private DaoCopia daoCopia = new DaoCopia();
-    private DaoGenero daoGenero;
+    private DaoGenero daoGenero = new DaoGenero() ;
     private Livro livro;
     private boolean inserindo;
 
@@ -83,9 +85,11 @@ public class LivrosController implements Initializable {
         genero.adicionarLstLivro(livro);
 
         if (inserindo) {
-            daoLivro.create(livro);
+            daoLivro.createm(livro);
+            JOptionPane.showMessageDialog(null, "Livro"+" Id: "+livro.getId()+" salvo!");
         } else {
             daoLivro.update(livro);
+            JOptionPane.showMessageDialog(null, "Livro"+" Id: "+livro.getId()+" Atualizado!");
         }
 
         preencherLista();
@@ -104,7 +108,7 @@ public class LivrosController implements Initializable {
     @FXML
     private void Excluir_Click(ActionEvent event) {
 
-        daoLivro.delete(livro);
+        daoLivro.delete(livro.getId());
         preencherLista();
     }
 
@@ -118,6 +122,8 @@ public class LivrosController implements Initializable {
         // Deixa os campos em branco
         TxtId.setText("");
         TxtNome.setText("");
+        TxtAno.setText("");
+        TxtEdicao.setText("");
         ComboBoxAutores.setValue(null);
         ComboBoxGenero.setValue(null);
 
@@ -151,6 +157,8 @@ public class LivrosController implements Initializable {
 
         TxtId.setText(livro.getId().toString());
         TxtNome.setText(livro.getNome());
+        TxtAno.setText(Integer.toString(livro.getAno()));
+        TxtEdicao.setText(livro.getEdicao());
         ComboBoxAutores.setValue(livro.getAutor());
         ComboBoxGenero.setValue(livro.getGenero());
 
@@ -161,6 +169,8 @@ public class LivrosController implements Initializable {
         ListaLivros.setDisable(habilitar); // Desabilita
         TabelaEmprestimos.setDisable(habilitar); // Desabilita
         TxtNome.setDisable(!habilitar); // Habilita
+        TxtAno.setDisable(!habilitar);
+        TxtEdicao.setDisable(!habilitar);
         ComboBoxAutores.setDisable(!habilitar);
         ComboBoxGenero.setDisable(!habilitar);
         BotaoExcluir.setDisable(habilitar);

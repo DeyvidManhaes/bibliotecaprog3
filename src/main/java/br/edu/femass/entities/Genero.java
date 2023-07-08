@@ -20,6 +20,10 @@ public class Genero {
 
         livros.add(livro);
     }
+    @Override
+    public String toString() {
+        return this.nome;
+    }
 
     
 }

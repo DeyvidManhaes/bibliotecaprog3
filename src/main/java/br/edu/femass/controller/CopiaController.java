@@ -58,7 +58,7 @@ public class CopiaController implements Initializable {
 
         preencherLista();
 
-        ColunaCodigo.setCellValueFactory(new PropertyValueFactory<Copia, Integer>("codigo"));
+        ColunaCodigo.setCellValueFactory(new PropertyValueFactory<Copia, Integer>("Id"));
         ColunaTitulo.setCellValueFactory(new PropertyValueFactory<Livro, String>("livro"));
         
 
@@ -69,7 +69,7 @@ public class CopiaController implements Initializable {
 
         Copia copia = new Copia(ComboBoxLivros.getSelectionModel().getSelectedItem());
 
-        daoCopia.create(copia);
+        daoCopia.createm(copia);
         preencherLista();
     }
 
@@ -102,7 +102,7 @@ public class CopiaController implements Initializable {
          * }
          */
 
-        daoCopia.delete(copia);
+        daoCopia.delete(copia.getId());
         preencherLista();
     }
 

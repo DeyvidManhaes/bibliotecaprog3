@@ -79,7 +79,7 @@ public class AutorController implements Initializable {
     @FXML
     private void Excluir_Click(ActionEvent event) {
 
-        daoAutor.delete(autor);
+        daoAutor.delete(autor.getId());
         dadosEmBranco();
         preencherLista();
         JOptionPane.showMessageDialog(null, "Autor Excluido!");
@@ -150,8 +150,7 @@ public class AutorController implements Initializable {
 
     private void preencherLista() {
 
-        List<Autor> autores = daoAutor.findAll();
-
+        List<Autor> autores = daoAutor.findAll();   
         ObservableList<Autor> data = FXCollections.observableArrayList(autores);
         ListaAutores.setItems(data);
 

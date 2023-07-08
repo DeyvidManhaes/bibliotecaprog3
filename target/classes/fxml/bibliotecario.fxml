@@ -6,9 +6,11 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="244.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.femass.controller.BibliotecarioController">
    <children>
-      <Button layoutX="60.0" layoutY="30.0" mnemonicParsing="false" onAction="#ClickButton_Usu" text="Cadastro Usuários" />
-      <Button layoutX="60.0" layoutY="122.0" mnemonicParsing="false" onAction="#ClickButton_Livros" text="Cadastro Livros" />
-      <Button layoutX="60.0" layoutY="77.0" mnemonicParsing="false" onAction="#ClickButton_Bibl" text="Emprestimos e Devoluções" />
-      <Button layoutX="64.0" layoutY="166.0" mnemonicParsing="false" onAction="#ClickButton_Genero" text="Cadastro Genero" />
+      <Button layoutX="333.0" layoutY="46.0" mnemonicParsing="false" onAction="#ClickButton_Usu" text="Cadastro Usuários" />
+      <Button layoutX="69.0" layoutY="31.0" mnemonicParsing="false" onAction="#ClickButton_Livros" text="Cadastro Livros" />
+      <Button layoutX="313.0" layoutY="107.0" mnemonicParsing="false" onAction="#ClickButton_Bibl" text="Emprestimos e Devoluções" />
+      <Button layoutX="65.0" layoutY="77.0" mnemonicParsing="false" onAction="#ClickButton_Genero" text="Cadastro Genero" />
+      <Button layoutX="63.0" layoutY="123.0" mnemonicParsing="false" onAction="#ClickButton_Autores" text="Cadastro Autores" />
+      <Button layoutX="63.0" layoutY="173.0" mnemonicParsing="false" onAction="#ClickButton_Copias" text="Cadastro Copias" />
    </children>
 </Pane>
