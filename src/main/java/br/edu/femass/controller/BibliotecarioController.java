@@ -33,7 +33,7 @@ public class BibliotecarioController implements Initializable{
     @FXML
     private void ClickButton_Livros(ActionEvent event){
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Livros.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Livro.fxml"));
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -49,12 +49,28 @@ public class BibliotecarioController implements Initializable{
          @FXML
     private void ClickButton_Bibl(ActionEvent event){
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Biblioteca.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Emprestimo.fxml"));
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
 
             stage.setTitle("Emprestimos e Devoluções");
+            stage.setScene(scene);
+            stage.show();
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+
+    }
+       @FXML
+    private void ClickButton_Genero(ActionEvent event){
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Genero.fxml"));
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+
+            stage.setTitle("Cadastro Genero");
             stage.setScene(scene);
             stage.show();
         } catch(Exception ex){

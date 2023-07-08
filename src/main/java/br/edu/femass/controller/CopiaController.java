@@ -27,6 +27,8 @@ public class CopiaController implements Initializable {
 
     @FXML
     private TextField TxtCodigo;
+    @FXML
+    private TextField TxtTitulo;
    
     @FXML
     private TextField TxtAutor;
@@ -112,7 +114,7 @@ public class CopiaController implements Initializable {
             return;
 
         TxtCodigo.setText(copia.getId().toString());
-
+        TxtTitulo.setText(copia.getLivro().getNome().toString());
         TxtAutor.setText(copia.getLivro().getAutor().toString());
         
 

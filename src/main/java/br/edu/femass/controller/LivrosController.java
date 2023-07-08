@@ -57,7 +57,7 @@ public class LivrosController implements Initializable {
     private DaoLivro daoLivro = new DaoLivro();
     private DaoAutor daoAutor = new DaoAutor();
     private DaoCopia daoCopia = new DaoCopia();
-    private DaoGenero daoGenero = new DaoGenero();
+    private DaoGenero daoGenero;
     private Livro livro;
     private boolean inserindo;
 
