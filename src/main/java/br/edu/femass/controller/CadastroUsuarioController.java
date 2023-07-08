@@ -143,8 +143,11 @@ public class CadastroUsuarioController implements Initializable{
                     JOptionPane.showMessageDialog(null, "Leitor salvo!");
                 }
 
+                 dadosEmBranco();
+                preencherLista();
                 bool = true;
-                break;
+               
+                
 
             } else if (indexCombo == "Professor") {
                 LabelInfo.setText("Formação:");
@@ -182,9 +185,11 @@ public class CadastroUsuarioController implements Initializable{
 
                     
                 }
-
+                dadosEmBranco();
+                preencherLista();
                 bool = true;
-                break;
+                
+                
             }
 
             JOptionPane.showMessageDialog(null, "Selecione um tipo de leitor");
@@ -270,11 +275,11 @@ public class CadastroUsuarioController implements Initializable{
     @FXML
     private void CBoxTipo_Clicked(ActionEvent event) {
 
-        int indexCombo = CBoxTipo.getSelectionModel().getSelectedIndex();
+        String indexCombo2 = CBoxTipo.getSelectionModel().getSelectedItem();
 
         String textoLabel;
 
-        if (indexCombo == 0)
+        if (indexCombo2 == "Aluno")
             textoLabel = "Matrícula:";
         else
             textoLabel = "Formação:";
