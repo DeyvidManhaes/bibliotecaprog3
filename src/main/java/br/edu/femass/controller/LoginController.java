@@ -24,6 +24,50 @@ public class LoginController implements Initializable{
     private PasswordField Senha;
 
     @FXML
+    private void Key_pressed_senha(ActionEvent event){
+      
+      String usuario = TxtLogin.getText();
+        String Senha1 = Senha.getText();
+      try{
+
+        if(usuario.equals("adm") && Senha1.equals("adm12345") ){
+
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/bibliotecario.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+    
+            stage.setTitle("Bibliotecário");
+            stage.setScene(scene);
+            stage.show();
+
+
+            
+
+
+        }
+        Dao<Usuario> daousuario = new Dao<>(Usuario.class);
+        Usuario u = daousuario.findById(daousuario);
+        
+        if(usuario.equals(u.getLogin()) && Senha1.equals(u.getSenha())){
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Usuario.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+    
+            stage.setTitle(u.getLeitor().getNome());
+            stage.setScene(scene);
+            stage.show();
+
+        }
+        
+         
+      }catch (Exception ex){
+        ex.printStackTrace();
+      }
+
+
+    }
+
+    @FXML
     private void Logar_button(ActionEvent event){
 
         String usuario = TxtLogin.getText();

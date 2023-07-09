@@ -10,7 +10,7 @@
       <Label layoutX="115.0" layoutY="90.0" text="Usuário" />
       <Label layoutX="115.0" layoutY="137.0" text="Senha" />
       <TextField fx:id="TxtLogin" layoutX="174.0" layoutY="85.0" />
-      <PasswordField fx:id="Senha" layoutX="174.0" layoutY="132.0" />
+      <PasswordField fx:id="Senha" layoutX="174.0" layoutY="132.0" onKeyPressed="#Key_pressed_senha" />
       <Button fx:id="button" layoutX="306.0" layoutY="185.0" mnemonicParsing="false" onAction="#Logar_button" text="Logar" />
       <ImageView fitHeight="67.0" fitWidth="82.0" layoutX="14.0" layoutY="6.0">
          <image>
