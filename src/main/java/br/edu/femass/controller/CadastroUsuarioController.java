@@ -11,6 +11,7 @@ import br.edu.femass.dao.DaoAluno;
 import br.edu.femass.dao.DaoEmprestimo;
 import br.edu.femass.dao.DaoLeitor;
 import br.edu.femass.dao.DaoProfessor;
+import br.edu.femass.dao.DaoTelefone;
 import br.edu.femass.dao.DaoUsuario;
 import br.edu.femass.entities.Aluno;
 import br.edu.femass.entities.Emprestimo;
@@ -77,11 +78,12 @@ public class CadastroUsuarioController implements Initializable{
     private Button BotaoCadastrar;
     @FXML
     private Button BotaoSalvar;
+    
     private DaoAluno daoAluno = new DaoAluno();
     private DaoProfessor daoProfessor = new DaoProfessor();
     private DaoEmprestimo daoEmprestimo = new DaoEmprestimo();
     private DaoUsuario daoUsuario = new DaoUsuario();
-    private DaoLeitor daoLeitor = new DaoLeitor();
+    private DaoTelefone daoTelefone = new DaoTelefone();
     private Leitor leitor;
     private Aluno aluno;
     private Usuario usuario;
@@ -112,34 +114,42 @@ public class CadastroUsuarioController implements Initializable{
         do {
             if (indexCombo == "Aluno"){
                
-                leitor = new Leitor();
+               
                 telefone = new Telefone();
                 aluno = new Aluno();
                 usuario = new Usuario();
 
                 
+
+                String teloriginal = TxtTelefone.getText();
+                int cont = teloriginal.length();
+                String dddpart = teloriginal.substring(0,3);
+                String telpart = teloriginal.substring(3,cont);
+
                 aluno.setNome(TxtNome.getText());
                 aluno.setEmail(TxtEmail.getText());
-                telefone.setDdd(Txtddd.getText());
-                telefone.setNumero(TxtTelefone.getText());
+                telefone.setDdd(dddpart);
+                telefone.setNumero(telpart);
                 aluno.addTelefone(telefone);
                 aluno.setMatricula(TxtEspecifica.getText());
                 aluno.setPrazoMaximoDevolucao();
-                aluno.setUsuario(usuario);
                 usuario.setLogin(aluno.getNome());
                 usuario.setSenha(TxtSenha.getText());
+                aluno.setUsuario(usuario);
+                
                 
 
                 if (inserindo) {
-                    daoLeitor.create(leitor);
                     daoAluno.create(aluno);
                     daoUsuario.create(usuario);
+                    daoTelefone.create(telefone);
 
                     JOptionPane.showMessageDialog(null,  "Leitor"+" Id: "+leitor.getId()+" salvo!");
                 } else {
-                    daoLeitor.update(leitor);
+                    
                     daoAluno.update(aluno);
                     daoUsuario.update(usuario);
+                    daoTelefone.update(telefone);
 
                     JOptionPane.showMessageDialog(null, "Leitor salvo!");
                 }
@@ -153,33 +163,39 @@ public class CadastroUsuarioController implements Initializable{
             } else if (indexCombo == "Professor") {
                 
 
-                leitor = new Leitor();
+               
                 telefone = new Telefone();
                 professor = new Professor();
                 usuario = new Usuario();
                 
-               
+                String teloriginal = TxtTelefone.getText();
+                int cont = teloriginal.length();
+                String dddpart = teloriginal.substring(0,3);
+                String telpart = teloriginal.substring(3,cont);
                 professor.setNome(TxtNome.getText());
                 professor.setEmail(TxtEmail.getText());
-                telefone.setDdd(Txtddd.getText());
-                telefone.setNumero(TxtTelefone.getText());
+                telefone.setDdd(dddpart);
+                telefone.setNumero(telpart);
                 professor.addTelefone(telefone);
                 professor.setFormacao(TxtEspecifica.getText());
                 professor.setPrazoMaximoDevolucao();
-                professor.setUsuario(usuario);
                 usuario.setLogin(professor.getNome());
                 usuario.setSenha(TxtSenha.getText());
+                professor.setUsuario(usuario);
+                
 
                 if (inserindo) {
-                    daoLeitor.create(leitor);
+                    
                     daoProfessor.create(professor);
                     daoUsuario.create(usuario);
+                    daoTelefone.create(telefone);
 
                     JOptionPane.showMessageDialog(null, "Leitor"+" Id: "+leitor.getId()+" salvo!");
                 } else {
-                    daoLeitor.update(leitor);
+                    
                     daoProfessor.update(professor);
                     daoUsuario.update(usuario);
+                    daoTelefone.update(telefone);
                     JOptionPane.showMessageDialog(null, "Leitor"+" Id: "+leitor.getId()+" atualizado!");
                         
                     
@@ -221,14 +237,24 @@ public class CadastroUsuarioController implements Initializable{
 
             daoAluno.delete(aluno.getId());
             
-            daoUsuario.delete(usuario.getLogin().equals(aluno.getNome()));
+            Usuario usuario1 = aluno.getUsuario();
+            daoUsuario.delete(usuario1.getId());
+            List<Telefone> telefones = aluno.getTelefones();
+            for (Telefone telefone : telefones){
+                daoTelefone.delete(telefone.getId());
+            }
 
         } else if (TabelaLeitores.getSelectionModel().getSelectedItem().getClass() == Professor.class) {
 
             professor = (Professor) TabelaLeitores.getSelectionModel().getSelectedItem();
 
             daoProfessor.delete(professor.getId());
-            daoUsuario.delete(usuario.getLogin().equals(professor.getNome()));
+            Usuario usuario1 = professor.getUsuario();
+            daoUsuario.delete(usuario1.getId());
+             List<Telefone> telefones = professor.getTelefones();
+            for (Telefone telefone : telefones){
+                daoTelefone.delete(telefone.getId());
+            }
 
         }
 
@@ -274,7 +300,7 @@ public class CadastroUsuarioController implements Initializable{
     }
 
     @FXML
-    private void CBoxTipo_Clicked(ActionEvent event) {
+    private void CBoxTipo_Clicked(MouseEvent event) {
 
         String indexCombo2 = CBoxTipo.getSelectionModel().getSelectedItem();
 
@@ -313,8 +339,7 @@ public class CadastroUsuarioController implements Initializable{
         TxtLogin.setText(usuario.getLogin());
         TxtSenha.setText(usuario.getSenha());
 
-        TxtTelefone.setText(telefone.getNumero());
-        Txtddd.setText(telefone.getDdd());
+        TxtTelefone.setText(telefone.getDdd()+telefone.getNumero());
         TxtPrazo.setText(leitor.getPrazoMaximoDevolucao().toString());
         CBoxTipo.setValue(leitor.getClass().getSimpleName());
         LabelInfo.setText(leitor.getClass() == Aluno.class ? "Matrícula" : "Disciplina");
@@ -328,7 +353,6 @@ public class CadastroUsuarioController implements Initializable{
         TxtNome.setText("");
         TxtEmail.setText("");
         TxtTelefone.setText("");
-        Txtddd.setText("");
         TxtEspecifica.setText("");
         TxtPrazo.setText("");
         CBoxTipo.setValue("Selecione um tipo de leitor");
@@ -347,7 +371,6 @@ public class CadastroUsuarioController implements Initializable{
         TxtNome.setDisable(!habilitar); // Habilita
         TxtEmail.setDisable(!habilitar);
         TxtTelefone.setDisable(!habilitar);
-        Txtddd.setDisable(!habilitar);
         BotaoExcluir.setDisable(habilitar);
         BotaoCadastrar.setDisable(habilitar);
         BotaoEditar.setDisable(habilitar);
