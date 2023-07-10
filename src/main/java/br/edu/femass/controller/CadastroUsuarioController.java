@@ -364,7 +364,7 @@ public class CadastroUsuarioController implements Initializable{
         TxtEspecifica.setText("");
         TxtPrazo.setText("");
         CBoxTipo.setValue("Selecione um tipo de leitor");
-        ;
+        
         LabelInfo.setText("");
         TxtEspecifica.setText("");
         TxtLogin.setText("");
