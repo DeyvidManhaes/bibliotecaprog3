@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 import br.edu.femass.dao.DaoAluno;
 import br.edu.femass.dao.DaoEmprestimo;
-import br.edu.femass.dao.DaoLeitor;
+
 import br.edu.femass.dao.DaoProfessor;
 import br.edu.femass.dao.DaoTelefone;
 import br.edu.femass.dao.DaoUsuario;
@@ -113,12 +113,6 @@ public class CadastroUsuarioController implements Initializable{
 
         do {
             if (indexCombo == "Aluno"){
-               
-               
-                telefone = new Telefone();
-                aluno = new Aluno();
-                usuario = new Usuario();
-
                 
 
                 String teloriginal = TxtTelefone.getText();
@@ -133,9 +127,10 @@ public class CadastroUsuarioController implements Initializable{
                 aluno.addTelefone(telefone);
                 aluno.setMatricula(TxtEspecifica.getText());
                 aluno.setPrazoMaximoDevolucao();
-                usuario.setLogin(aluno.getNome());
+                usuario.setLogin(TxtLogin.getText());
                 usuario.setSenha(TxtSenha.getText());
                 aluno.setUsuario(usuario);
+                usuario.setLeitor(aluno);
                 
                 
 
@@ -161,17 +156,12 @@ public class CadastroUsuarioController implements Initializable{
                 
 
             } else if (indexCombo == "Professor") {
-                
 
-               
-                telefone = new Telefone();
-                professor = new Professor();
-                usuario = new Usuario();
-                
                 String teloriginal = TxtTelefone.getText();
                 int cont = teloriginal.length();
                 String dddpart = teloriginal.substring(0,3);
                 String telpart = teloriginal.substring(3,cont);
+
                 professor.setNome(TxtNome.getText());
                 professor.setEmail(TxtEmail.getText());
                 telefone.setDdd(dddpart);
@@ -179,9 +169,10 @@ public class CadastroUsuarioController implements Initializable{
                 professor.addTelefone(telefone);
                 professor.setFormacao(TxtEspecifica.getText());
                 professor.setPrazoMaximoDevolucao();
-                usuario.setLogin(professor.getNome());
+                usuario.setLogin(TxtLogin.getText());
                 usuario.setSenha(TxtSenha.getText());
                 professor.setUsuario(usuario);
+                usuario.setLeitor(professor);
                 
 
                 if (inserindo) {
@@ -223,7 +214,7 @@ public class CadastroUsuarioController implements Initializable{
     private void Button_Click_Editar(ActionEvent event) {
 
         editar(true);
-        inserindo = false;
+        inserindo = true;
 
     }
 
@@ -266,10 +257,23 @@ public class CadastroUsuarioController implements Initializable{
 
     @FXML
     private void Button_Click_Cadastrar(ActionEvent event) {
+        this.telefone = new Telefone();
+        this.usuario = new Usuario();
+        String indexCombo2 = CBoxTipo.getSelectionModel().getSelectedItem();
 
-        editar(true);
-        inserindo = true;
+        if(indexCombo2 == "Aluno"){
+            this.aluno = new Aluno();
 
+        }
+
+        else if (indexCombo2 == "Professor"){
+            this.professor = new Professor();
+        }
+       
+         editar(true);
+           inserindo = true;
+
+  
         // Deixa os campos em branco
         
         dadosEmBranco();
@@ -307,11 +311,15 @@ public class CadastroUsuarioController implements Initializable{
         String textoLabel;
 
         if (indexCombo2 == "Aluno"){
-            textoLabel = "Matrícula:";}
-        else{
-            textoLabel = "Formação:";}
+            
+            textoLabel = "Matrícula:";
+            
+        }
+        else if (indexCombo2 == "Professor"){
+            textoLabel = "Formação:";
+            
 
-            LabelInfo.setText(textoLabel);
+            LabelInfo.setText(textoLabel);}
 
     }
 
@@ -320,26 +328,26 @@ public class CadastroUsuarioController implements Initializable{
         this.leitor = TabelaLeitores.getSelectionModel().getSelectedItem();
         
 
-        if (leitor.getClass() == Aluno.class)
+        if (leitor.getClass() == Aluno.class){
             
-            aluno = (Aluno) leitor;
+            aluno = (Aluno) leitor;}
             
            
             
 
-        else
-            professor = (Professor) leitor;
+        else if(leitor.getClass()==Professor.class){
+            professor = (Professor) leitor;}
 
-        if (leitor == null)
-            return;
+        if (leitor == null){
+            return;}
 
         TxtId.setText(leitor.getId().toString());
         TxtNome.setText(leitor.getNome());
         TxtEmail.setText(leitor.getEmail());
         TxtLogin.setText(usuario.getLogin());
         TxtSenha.setText(usuario.getSenha());
-
-        TxtTelefone.setText(telefone.getDdd()+telefone.getNumero());
+        String telefone1 = telefone.getDdd() + telefone.getNumero();
+        TxtTelefone.setText(telefone1);
         TxtPrazo.setText(leitor.getPrazoMaximoDevolucao().toString());
         CBoxTipo.setValue(leitor.getClass().getSimpleName());
         LabelInfo.setText(leitor.getClass() == Aluno.class ? "Matrícula" : "Disciplina");

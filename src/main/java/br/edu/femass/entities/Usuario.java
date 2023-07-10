@@ -11,9 +11,9 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, unique = true)
+    @Column( unique = true)
     private String login;
-    @Column(length = 8, nullable = false, unique = false)
+    @Column(length = 8, unique = false)
     private String senha;
     @OneToOne(cascade = { CascadeType.ALL })
     private Leitor leitor;

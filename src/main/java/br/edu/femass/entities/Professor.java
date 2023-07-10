@@ -20,6 +20,10 @@ public class Professor extends Leitor{
    public void setPrazoMaximoDevolucao(){
     this.prazoMaximoDevolucao = 30;
    }
+   @Override
+   public String toString() {
+       return this.getNome();
+   }
 
    
     }
